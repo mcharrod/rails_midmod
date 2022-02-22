@@ -14,7 +14,12 @@ describe 'movie show' do
 
     expect(page).to have_content(movie1.title)
     expect(page).to have_content(movie1.creation_year)
-    expect(page).to have_content(movie1.title)
+    expect(page).to have_content(movie1.genre)
+
+    expect(page).to have_content(actor1.name)
+    expect(page).to have_content(actor2.name)
+    expect(page).to have_content(actor3.name)
+
     expect(page).to have_content("Average actor age: #{movie1.average_age}")
   end
 
@@ -28,6 +33,7 @@ describe 'movie show' do
     actor2 = movie1.actors.create!(name: "Actor 2", age: 10)
     actor3 = movie1.actors.create!(name: "Actor 3", age: 20)
 
+    # not part of movie 1 actors
     actor4 = movie2.actors.create!(name: "Actor 4", age: 30)
 
     visit "/movies/#{movie1.id}"
