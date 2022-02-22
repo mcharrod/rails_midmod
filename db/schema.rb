@@ -22,22 +22,6 @@ ActiveRecord::Schema.define(version: 2022_02_22_165336) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "doctors", force: :cascade do |t|
-    t.string "name"
-    t.string "specialty"
-    t.string "university"
-    t.bigint "hospital_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["hospital_id"], name: "index_doctors_on_hospital_id"
-  end
-
-  create_table "hospitals", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "movie_actors", force: :cascade do |t|
     t.bigint "movie_id"
     t.bigint "actor_id"
@@ -55,18 +39,6 @@ ActiveRecord::Schema.define(version: 2022_02_22_165336) do
     t.index ["studio_id"], name: "index_movies_on_studio_id"
   end
 
-  create_table "patient_doctors", force: :cascade do |t|
-    t.bigint "patient_id"
-    t.bigint "doctor_id"
-    t.index ["doctor_id"], name: "index_patient_doctors_on_doctor_id"
-    t.index ["patient_id"], name: "index_patient_doctors_on_patient_id"
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
-  end
-
   create_table "studios", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -74,10 +46,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_165336) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "doctors", "hospitals"
   add_foreign_key "movie_actors", "actors"
   add_foreign_key "movie_actors", "movies"
   add_foreign_key "movies", "studios"
-  add_foreign_key "patient_doctors", "doctors"
-  add_foreign_key "patient_doctors", "patients"
 end
